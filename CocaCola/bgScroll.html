@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <script src="js/jquery-2.1.4.js"></script>
+    <title>背景下拉</title>
+    <style>
+        body{
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+            overflow-y: hidden;
+            width: 640px;
+            height: 1136px;
+        }
+        #bg{
+            position: absolute;
+            z-index: -1;
+            bottom: 0;
+        }
+        #randomThings{
+            position: absolute;
+            border: 1px solid red;
+            top: 0;
+            width: 640px;
+            height: 100px;
+        }
+        #randomObj{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        #bear{
+            position: absolute;
+            border: 1px solid blue;
+            top:300px;
+            width: 640px;
+            height: 150px;
+        }
+        #flyBear{
+            position: absolute;
+            left: 270px;
+            top:0;
+        }
+
+    </style>
+
+    <script>
+        var height=0;
+        var interval1;
+        var shakeTime=20;
+
+        /*小熊初始速度为玩家摇晃手机的次数*/
+        var bgSpeed=shakeTime;
+
+        $(document).ready(function(){
+            interval1=setInterval(scroll,20);/*修改背景下滑速度*/
+            changeRandomObj();
+        });
+
+        /*背景图片向下滚动*/
+        function scroll(){
+            $("#bg").css('bottom',height+"px");
+            height=height-bgSpeed;
+            bgSpeed-=0.0;
+            /*当图片滚动到顶部或速度为0时，停止滚动*/
+            if(height<=-($("#long_bg").height()-1136)||bgSpeed<=0){
+                clearInterval(interval1);
+                /*清除随机物品*/
+                $("#randomObj").fadeOut(100);
+                /*小熊停止移动*/
+                $("#flyBear").attr("src","images/bear/bearFly1.png")
+            }
+        }
+
+
+        /*
+        * randomNum
+        * 在20个随机物品中选择，总加速的概率不超过5%；
+        * 判断randomNum在加速范围还是在减速范围
+        * */
+
+        var randomNum;
+
+        /*随机出现加速或减速物品*/
+        function changeRandomObj(){
+
+            /*生成随机数字*/
+            function getRandom(n){
+                return parseInt(Math.floor(Math.random()*n+1));
+            }
+
+            randomNum=getRandom(12);
+
+            $("#randomObj").attr("src","images/randomObj/"+randomNum+".png");
+            /*随机物品移动*/
+            randomObjMove();
+        }
+
+        function randomObjMove(){
+            $("#randomObj").animate({marginRight:280,marginTop:300},3000,function(){
+                /*随机物品为加速物品*/
+                if(randomNum>=1&&randomNum<=2){
+                    /*小熊加速*/
+                    bgSpeed+=4;
+                }
+                /*随机物品为减速物品*/
+                else if(randomNum>=3&&randomNum<=12){
+                    /*小熊减速*/
+                    bgSpeed-=1;
+                }
+                /*随机物品消失*/
+                $("#randomObj").css("visibility","hidden")
+                    .animate({marginRight:0,marginTop:0},1);
+                setTimeout(function(){
+                    $("#randomObj").css("visibility","visible");
+                    changeRandomObj();
+                },2000)
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div id="bg">
+        <img src="images/long_bg.jpg" id="long_bg">
+    </div>
+
+    <div id="randomThings">
+        <img src="#" id="randomObj">
+    </div>
+    <div id="bear">
+        <img src="images/bear/bearFly.gif" id="flyBear">
+    </div>
+</body>
+</html>

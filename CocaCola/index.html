@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>一汽冲天</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/shake.js"></script>
+</head>
+
+<body onload="changeWidthHeight()">
+
+<div id="noOperate">
+    <div id="vPosition">
+        <span>&nbsp;正在加载游戏...</span><br/>
+        <img src="images/loading.gif">
+    </div>
+</div>
+<!--背景图片-->
+<div id="bgImg">
+    <img src="images/main_bg.png" id="main_bg">
+    <img src="images/long_bg.jpg" id="long_bg">
+</div>
+    <div id="mainPage">
+        <!--游戏标题-->
+        <div class="gameInfo">
+            <img src="images/gameTitle.png" id="gameTitle">
+            <img src="images/countDown.png" id="countDown">
+            <img src="images/lunchInfo.png" id="lunchInfo">
+        </div>
+        <!--随机物品-->
+        <div id="randomThings">
+            <div id="currentHeight">当前高度：<span id="heightNum">0</span>米</div>
+            <img src="#" id="randomObj">
+        </div>
+        <!--开始按钮-->
+        <div id="startBtn" >
+            <img src="images/button/startBtn.png" class="showTime">
+        </div>
+        <!--小熊-->
+        <div id="bear">
+            <img src="images/bear/bearStand.png" id="bearStand">
+        </div>
+        <!--可乐瓶-->
+        <div id="colaBottle">
+            <img src="images/info.png" class="colaBottle">
+        </div>
+    </div>
+<script src="js/CocaCola.js"></script>
+</body>
+</html>
+

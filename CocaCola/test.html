@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery-2.1.4.js"></script>
+    <script src="js/shake.js"></script>
+    <script>
+        /*晃动可乐瓶*/
+        function shakeBottle(){
+            var num=0;
+            var flag=true;/*flag为true时，num++，flag为false时，num--*/
+            var changeTime=0;
+
+            setTimeout(shakeOneTime,100);
+            var Interval;
+
+            function shakeOneTime(){
+                Interval=setInterval(changeBottle,50);
+                function changeBottle(){
+                    if(flag){
+                        /*更改图片地址*/
+                        $(".colaBottle").attr("src","images/bottle/"+num+".png");
+                        num++;
+                        if(num==2){
+                            flag=false;
+                        }
+                    }else{
+                        /*更改图片地址*/
+                        $(".colaBottle").attr("src","images/bottle/"+num+".png");
+                        num--;
+                        if(num==-2){
+                            flag=true;
+                        }
+                    }
+                    changeTime++;
+                    if(changeTime>=21){
+                        clearInterval(Interval);
+                    }
+                }
+            }
+        }
+
+        /*记录手机晃动次数*/
+        var shakeTime=0;/*手机晃动次数*/
+
+        function shakeRecord() {
+            var shownum=0;
+
+            var myShakeEvent = new Shake({
+                threshold: 15, // optional shake strength threshold
+                timeout: 200 // optional, determines the frequency of event generation
+            });
+
+            /*开始监听设备*/
+            myShakeEvent.start();
+
+            window.addEventListener('shake', shakeEventDidOccur, false);
+
+            //function to call when shake occurs
+            function shakeEventDidOccur () {
+                //put your own code here etc.
+                shakeBottle();
+                shakeTime++;
+
+            }
+
+            setTimeout(function(){
+                window.removeEventListener('shake', shakeEventDidOccur, false);
+
+                /*停止监听设备*/
+                /*myShakeEvent.stop();*/
+                if(document.removeEventListener){
+                    $("#shake").removeEventListener('click',shakeRecord,false);
+                }
+                else{
+                    $("#shake").detachEvent('onclick',shakeRecord);
+                }
+                shownum=shakeTime;
+                shakeTime=0;
+            },5000);
+
+            setTimeout(function(){
+                window.alert("您一共摇了"+shownum+"次！");
+            },7000);
+        }
+
+        $(document).ready(function(){
+            if(document.addEventListener){
+                $("#shake").addEventListener('click',shakeRecord,false);
+            }
+            else{
+                $("#shake").attachEvent('onclick',shakeRecord);
+            }
+        });
+
+
+        var left=true;
+        function bearFly(){
+            var num=1;
+            if(left){
+                num=1;
+                $("#flyBear img").attr("src","images/bear/bearFly"+num+".png");
+                left=false;
+            }else{
+                num=-1;
+                $("#flyBear img").attr("src","images/bear/bearFly"+num+".png");
+                left=true;
+            }
+        }
+        setInterval(bearFly,1000);
+    </script>
+</head>
+<body>
+<div id="colaBottle">
+    <img src="images/bottle/0.png" class="colaBottle">
+    <button onclick="shakeBottle()"  style="height: 100px;width: 200px" id="shake">shake</button>
+
+    <div id="flyBear">
+        <img src="images/bear/bearFly-1.png">
+    </div>
+</div>
+
+</body>
+</html>

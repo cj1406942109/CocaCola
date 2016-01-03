@@ -1,0 +1,129 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+body{
+    margin: 0 auto;
+    width: 640px;
+    height: 1136px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: 1px solid transparent;
+}
+
+/*页面加载完成之前禁止用户操作*/
+#noOperate{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 99999;
+    top:0;
+    text-align: center;
+    color: yellow;
+    font-size: 30px;
+    font-weight: bolder;
+    background-color: #3895E5;
+    opacity: 1;
+}
+#vPosition{
+    position: relative;
+    top: 250px;
+}
+#vPosition img{
+    width: 50px;
+}
+
+/*背景图片*/
+#bgImg{
+    width: 640px;
+    height: auto;
+}
+
+
+#main_bg{
+    position: absolute;
+    z-index: -1;
+}
+#long_bg{
+    position: absolute;
+    display: none;
+    z-index: -1;
+    top: -7964px;
+}
+
+/*主页面*/
+#mainPage{
+    width: 640px;
+}
+/*游戏提示信息*/
+.gameInfo{
+    width: 640px;
+    height: 140px;
+    margin-top: 120px;
+    border: 1px solid transparent;
+    opacity: 0;
+    text-align: center;
+}
+#randomThings{
+    position: absolute;
+    border: 1px solid transparent;
+    top: 0;
+    width: 640px;
+    height: 100px;
+}
+#currentHeight{
+    position: absolute;
+    color: yellow;
+    visibility: hidden;
+    font-size: 50px;
+    top:0;
+    left: 0;
+}
+#currentHeight span{
+    color:red;
+}
+
+#randomObj{
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+/*倒计时按钮*/
+#countDown,#lunchInfo{
+    width: 640px;
+    height: 140px;
+    display: none;
+}
+
+#startBtn{
+    width: 640px;
+    height: 120px;
+    margin-top: 100px;
+    border: 1px solid transparent;
+    opacity: 0;
+    text-align: center;
+}
+.showTime{
+    height: 120px;
+}
+#bear{
+    width: 150px;
+    height: 150px;
+    position: relative;
+    top:60px;
+    left: 250px;
+    visibility: hidden;
+    z-index: 99;
+}
+
+#colaBottle{
+    width: 640px;
+    height: 380px;
+    margin-top:0;
+    border: 1px solid transparent;
+    opacity: 0;
+    text-align: center;
+}
